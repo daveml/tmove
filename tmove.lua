@@ -58,6 +58,9 @@ end
 function Refuel(count)
 	print("Refueling...")
 	local fuelLevel = turtle.getFuelLevel()
+	if fuelLevel == nil
+		fuelLevel = 0
+	end
 	while fuelLevel < count do
 		if turtle.refuel(1) == false then
 			print("Insufficuent fuel onboard!")
