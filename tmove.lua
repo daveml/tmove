@@ -22,6 +22,7 @@ end
 function movefwd(count)
 	for i=1, count do
 		if turtle.forward(count) == false then
+			print("Blocked!")
 			break
 		end
 	end
@@ -30,6 +31,7 @@ end
 function moveUp(count)
 	for i=1, count do
 		if turtle.up(count) == false then
+			print("Blocked!")
 			break
 		end
 	end
@@ -40,25 +42,6 @@ function moveDown(count)
 		if turtle.down(count) == false then
 			break
 		end
-	end
-end
-
-function movezx(count)
-	if count > 0 then
-		movefwd(count)
-	else
-		turtle.turnLeft(2)
-		movefwd(count)
-	end
-end
-
-function movey(count)
-	if count > 0 then
-		turtle.up()
-		turtle.forward(count)
-	else
-		turtle.down()
-		turtle.forward(count)
 	end
 end
 
