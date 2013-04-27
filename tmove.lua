@@ -25,10 +25,10 @@ function movefwd(count)
 			turtle.forward()
 		else
 			print("Blocked!")
-			return 0
+			return false
 		end
 	end
-	return 1
+	return true
 end
 
 function moveUp(count)
@@ -37,10 +37,10 @@ function moveUp(count)
 			turtle.up()
 		else
 			print("Blocked!")
-			return 0
+			return false
 		end
 	end
-	return 1
+	return true
 end
 
 function moveDown(count)
@@ -49,10 +49,10 @@ function moveDown(count)
 			turtle.down()
 		else
 			print("Blocked")
-			return 0
+			return false
 		end
 	end
-	return 1
+	return true
 end
 
 function Refuel(count)
@@ -61,9 +61,12 @@ function Refuel(count)
 	while fuelLevel < count do
 		if turtle.refuel(1) == false then
 			print("Insufficuent fuel onboard!")
+			return false
 		end
 		fuelLevel = fuelLevel + turtle.getFuelLevel()
 	end
+	print("Fuel - OK!")
+	return true
 end
 
 function main()
