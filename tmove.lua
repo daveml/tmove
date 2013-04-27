@@ -55,6 +55,17 @@ function moveDown(count)
 	return 1
 end
 
+function Refuel(count)
+	print("Refueling...")
+	local fuelLevel = turtle.getFuelLevel()
+	while fuelLevel < count do
+		if turtle.refuel(1) == false then
+			print("Insufficuent fuel onboard!")
+		end
+		fuelLevel = fuelLevel + turtle.getFuelLevel()
+	end
+end
+
 function main()
 	
 	if zm == nil then
