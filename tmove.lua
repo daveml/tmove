@@ -118,7 +118,7 @@ function main()
 	end
 	
 	-- move up/down
-	if ym ~= nil then
+	if ym ~= nil and ym ~= 0 then
 		if ym > 0 then
 			print("Up : ", ym)
 			moveUp(ym)
