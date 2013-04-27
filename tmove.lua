@@ -23,7 +23,6 @@ function movefwd(count)
 	for i=1, count do
 		if turtle.detect() == false then
 			turtle.forward()
-		else
 			print("Blocked!")
 			return false
 		end
@@ -85,6 +84,7 @@ function main()
 		
 	if Refuel(zm+ym+xm) == false then
 		return
+	end
 	
 	print("Turtle moving")
 	 
