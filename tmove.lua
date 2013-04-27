@@ -73,6 +73,7 @@ function main()
 		return
 	end
 
+	Refuel()
 	print("Turtle moving")
 	 
 	-- move forward/back
