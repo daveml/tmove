@@ -104,10 +104,10 @@ function main()
 	if ym ~= nil then
 		if ym > 0 then
 			print("Up : ", ym)
-			turtle.moveUp(ym)
+			moveUp(ym)
 		else
 			print("Down : ", ym)
-			turtle.moveUp(-ym)
+			moveDown(-ym)
 		end
 	end
 end
