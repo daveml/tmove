@@ -58,7 +58,7 @@ end
 function Refuel(count)
 	print("Refueling...")
 	local fuelLevel = turtle.getFuelLevel()
-	if fuelLevel == nil
+	if fuelLevel == nil then
 		fuelLevel = 0
 	end
 	while fuelLevel < count do
