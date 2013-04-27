@@ -2,9 +2,9 @@
 
 local args = {...}
 
-local zm = args[1]
-local xm = args[2]
-local ym = args[3]
+local zm = tonumber(args[1])
+local xm = tonumber(args[2])
+local ym = tonumber(args[3])
 
 function usage()
 
