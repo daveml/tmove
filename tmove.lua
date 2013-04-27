@@ -56,13 +56,13 @@ function main()
 	 
 	-- move forward/back
 	if zm > 0 then
-		print("Forward - ",zm)
+		print("Forward : ",zm)
 		movefwd(zm)
 	else
-		print("Back - ",zm)
+		print("Back : ",zm)
 		turtle.turnLeft()
 		turtle.turnLeft()
-		movefwd(zm)
+		movefwd(-zm)
 		turtle.turnRight()
 		turtle.turnRight()
 	end
@@ -70,14 +70,14 @@ function main()
 	-- move left/right
 	if xm ~= nil then
 		if xm > 0 then
-			print("Right - ", xm)
+			print("Right : ", xm)
 			turtle.turnRight()
 			movefwd(xm)
 			turtle.turnLeft()
 		else
-			print("Left - ", xm)
+			print("Left : ", xm)
 			turtle.turnLeft()
-			movefwd(xm)
+			movefwd(-xm)
 			turtle.turnRight()
 		end
 	end
@@ -85,14 +85,14 @@ function main()
 	-- move up/down
 	if ym ~= nil then
 		if ym > 0 then
-			print("Up - ", ym)
+			print("Up : ", ym)
 			turtle.up()
 			movefwd(ym)
 			turtle.down()
 		else
-			print("Down - ", ym)
+			print("Down : ", ym)
 			turtle.down()
-			movefwd(ym)
+			movefwd(-ym)
 			turtle.up()
 		end
 	end
