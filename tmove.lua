@@ -9,11 +9,11 @@ local ym = tonumber(args[3])
 function usage()
 
 	print("--tmove v1.0")
-	print(" Helps you move your turtle around! :)")
+	print("Helps you move your")
+	print(" turtle around! :)")
 	print("")
-	print("\tUsage: tmove(forward/back,left/right,up/down")
-	print(" 'back', 'left', 'down' dorections are negative")
-	print("")
+	print("Usage: tmove fwd/back[,left/rt][,up/dwn]")
+	print(" 'back', 'left', 'down' are negative")
 	print("example: tmove(5)")
 	print("         tmove(2,-1,4)")
 
@@ -21,36 +21,47 @@ end
 
 function movefwd(count)
 	for i=1, count do
-		if turtle.forward(count) == false then
+		if turtle.detect() == false then
+			turtle.forward()
+		else
 			print("Blocked!")
-			break
+			return 0
 		end
 	end
+	return 1
 end
 
 function moveUp(count)
 	for i=1, count do
-		if turtle.up(count) == false then
+		if turtle.detectUp() == false then
+			turtle.up()
+		else
 			print("Blocked!")
-			break
+			return 0
 		end
 	end
+	return 1
 end
 
 function moveDown(count)
 	for i=1, count do
-		if turtle.down(count) == false then
-			break
+		if turtle.detectDown() == false then
+			turtle.down()
+		else
+			print("Blocked")
+			return 0
 		end
 	end
+	return 1
 end
 
 function main()
+	
 	if zm == nil then
 		usage()
-		exit(0)
+		return
 	end
-	
+
 	print("Turtle moving")
 	 
 	-- move forward/back
