@@ -83,7 +83,8 @@ function main()
 		xm = 0
 	end
 		
-	Refuel(zm+ym+xm)
+	if Refuel(zm+ym+xm) == false then
+		return
 	
 	print("Turtle moving")
 	 
