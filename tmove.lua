@@ -19,12 +19,20 @@ function usage()
 
 end
 
+function movefwd(count)
+	for i=1, count do
+		if turtle.forward(count) == false then
+			break
+		end
+	end
+end
+
 function movezx(count)
 	if count > 0 then
-		turtle.forward(count)
+		movefwd(count)
 	else
 		turtle.turnLeft(2)
-		turtle.forward(count)
+		movefwd(count)
 	end
 end
 
@@ -39,6 +47,9 @@ function movey(count)
 end
 
 function main()
+
+print(args)
+print(args[1])
 
 	if zm == nil then
 		usage()
