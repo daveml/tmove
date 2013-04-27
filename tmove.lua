@@ -27,6 +27,22 @@ function movefwd(count)
 	end
 end
 
+function moveUp(count)
+	for i=1, count do
+		if turtle.up(count) == false then
+			break
+		end
+	end
+end
+
+function moveDown(count)
+	for i=1, count do
+		if turtle.down(count) == false then
+			break
+		end
+	end
+end
+
 function movezx(count)
 	if count > 0 then
 		movefwd(count)
@@ -55,20 +71,22 @@ function main()
 	print("Turtle moving")
 	 
 	-- move forward/back
-	if zm > 0 then
-		print("Forward : ",zm)
-		movefwd(zm)
-	else
-		print("Back : ",zm)
-		turtle.turnLeft()
-		turtle.turnLeft()
-		movefwd(-zm)
-		turtle.turnRight()
-		turtle.turnRight()
+	if zm ~= 0 then
+		if zm > 0 then
+			print("Forward : ",zm)
+			movefwd(zm)
+		else
+			print("Back : ",zm)
+			turtle.turnLeft()
+			turtle.turnLeft()
+			movefwd(-zm)
+			turtle.turnRight()
+			turtle.turnRight()
+		end
 	end
-		
+			
 	-- move left/right
-	if xm ~= nil then
+	if xm ~= nil and xm ~= 0 then
 		if xm > 0 then
 			print("Right : ", xm)
 			turtle.turnRight()
@@ -86,14 +104,10 @@ function main()
 	if ym ~= nil then
 		if ym > 0 then
 			print("Up : ", ym)
-			turtle.up()
-			movefwd(ym)
-			turtle.down()
+			turtle.moveUp(ym)
 		else
 			print("Down : ", ym)
-			turtle.down()
-			movefwd(-ym)
-			turtle.up()
+			turtle.moveUp(-ym)
 		end
 	end
 end
