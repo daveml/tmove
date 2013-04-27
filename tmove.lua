@@ -47,22 +47,46 @@ function movey(count)
 end
 
 function main()
-
-print(args)
-print(args[1])
-
 	if zm == nil then
 		usage()
 	end
 	
-	movezx(zm)
+	-- move forward/back
+	if zm > 0 then
+		movefwd(zm)
+	else
+		turtle.turnLeft()
+		turtle.turnLeft()
+		movefwd(zm)
+		turtle.turnRight()
+		turtle.turnRight()
+	end
+		
+	-- move left/right
 	if xm ~= nil then
-		movezx(xm)
+		if xm > 0 then
+			turtle.turnRight()
+			movefwd(xm)
+			turtle.turnLeft()
+		else
+			turtle.turnLeft()
+			movefwd(xm)
+			turtle.turnRight()
+		end
 	end
+	
+	-- move up/down
 	if ym ~= nil then
-		movey(count)
+		if ym > 0 then
+			turtle.up()
+			movefwd(ym)
+			turtle.down()
+		else
+			turtle.down()
+			movefwd(ym)
+			turtle.up()
+		end
 	end
-
 end
 
 main()
