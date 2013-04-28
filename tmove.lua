@@ -328,7 +328,7 @@ function main()
 	tposTurnAround(tpos)
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
 	
-	tposSetDir(tpos,2);
+	tposSetDir(tpos,3);
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
 
 end
