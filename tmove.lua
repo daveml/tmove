@@ -218,7 +218,7 @@ function tposMoveDown(tpos, count)
 			if tpos.canBreakOnMove and turtle.digDown() then
 				_tposMoveDown(tpos)
 			else			
-				print("Blocked")
+				print("Blocked-", tpos.canBreakOnMove)
 				return false
 			end
 		end
