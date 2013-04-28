@@ -70,13 +70,13 @@ function tposDecZX_get(tpos)
 end
 
 function tposIncZX(tpos)
-	z,x = tposIncZX_get(tpos.dir)
+	z,x = tposIncZX_get(tpos)
 	tpos.z = tpos.z + z
 	tpos.x = tpos.x + x
 end
 
 function tposDecZX(tpos)
-	z,x = tposIncZX_get(tpos.dir)
+	z,x = tposIncZX_get(tpos)
 	tpos.z = tpos.z - z
 	tpos.x = tpos.x - x
 end
