@@ -323,7 +323,7 @@ function main()
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
 
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
-	tposSetDir(4);
+	tposSetDir(tpos,4);
 	
 
 end
