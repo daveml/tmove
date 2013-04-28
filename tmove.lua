@@ -124,6 +124,17 @@ function tposTurnLeft(tpos)
 	end
 end
 
+function tposTurnArround(tpos)
+	for i=1, count do
+		if turtle.left() then
+			tposRotateDirLeft(tpos)
+		else
+			return false
+		end
+	end
+	return true
+end
+
 function tposTurnRight(tpos)
 	if turtle.right() then
 		tposRotateDirRight(tpos)
@@ -151,7 +162,7 @@ function _tposMoveDown(tpos)
 	end
 end
 
-function movefwd(count)
+function tposMoveFwd(tpos,count)
 	for i=1, count do
 		if turtle.detect() == false then
 			_tposMoveFwd(tpos)
@@ -163,7 +174,19 @@ function movefwd(count)
 	return true
 end
 
-function moveUp(count)
+function tposMoveBack(tpos,count)
+	for i=1, count do
+		if turtle.detect() == false then
+			_tposMoveBack(tpos)
+		else
+			print("Blocked!")
+			return false
+		end
+	end
+	return true
+end
+
+function tposMoveUp(tpos,count)
 	for i=1, count do
 		if turtle.detectUp() == false then
 			_tposMoveUp(tpos)
@@ -175,7 +198,7 @@ function moveUp(count)
 	return true
 end
 
-function moveDown(count)
+function tposMoveDown(count)
 	for i=1, count do
 		if turtle.detectDown() == false then
 			_tposMoveDown(tpos)
@@ -186,7 +209,6 @@ function moveDown(count)
 	end
 	return true
 end
-
 
 
 
@@ -209,7 +231,7 @@ end
 
 function main()
 	
-	tposInit()
+	tpos = tposInit()
 	
 	if zm == nil then
 		usage()
@@ -233,29 +255,26 @@ function main()
 	if zm ~= 0 then
 		if zm > 0 then
 			print("Forward : ",zm)
-			movefwd(zm)
+			tposMoveFwd(tpos,zm)
 		else
 			print("Back : ",zm)
-			tposTurnLeft()
-			tposTurnLeft()
-			movefwd(-zm)
-			tposTurnRight()
-			tposTurnRight()
+			tposMoveBack(tpos,-zm)
 		end
 	end
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
+
 	-- move left/right
 	if xm ~= nil and xm ~= 0 then
 		if xm > 0 then
 			print("Right : ", xm)
-			tpos.TurnRightle.turnRight()
-			movefwd(xm)
-			turtle.turnLeft()
+			tposTurnRight(tpos)
+			tposMoveFwd(tpos,xm)
+			tposTurnLeft(tpos)
 		else
 			print("Left : ", xm)
-			turtle.turnLeft()
-			movefwd(-xm)
-			turtle.turnRight()
+			tposTurnLeft(tpos)
+			tposMoveFwd(tpos,-xm)
+			tposTurnRight(tpos)
 		end
 	end
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
@@ -264,10 +283,10 @@ function main()
 	if ym ~= nil and ym ~= 0 then
 		if ym > 0 then
 			print("Up : ", ym)
-			moveUp(ym)
+			tposMoveUp(tpos,ym)
 		else
 			print("Down : ", ym)
-			moveDown(-ym)
+			tposMoveDown(tpos,-ym)
 		end
 	end
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
