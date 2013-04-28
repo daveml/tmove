@@ -334,58 +334,8 @@ function main()
 	
 	print("Turtle moving")
 	
-	 tposMoveAbs(tpos,zm,ym,xm)
-	 
---[	 
-	-- move forward/back
-	if zm ~= 0 then
-		if zm > 0 then
-			print("Forward : ",zm)
-			tposMoveFwd(tpos,zm)
-		else
-			print("Back : ",zm)
-			tposMoveBack(tpos,-zm)
-		end
-	end
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
-
-	-- move left/right
-	if xm ~= nil and xm ~= 0 then
-		if xm > 0 then
-			print("Right : ", xm)
-			tposTurnRight(tpos)
-			tposMoveFwd(tpos,xm)
-			tposTurnLeft(tpos)
-		else
-			print("Left : ", xm)
-			tposTurnLeft(tpos)
-			tposMoveFwd(tpos,-xm)
-			tposTurnRight(tpos)
-		end
-	end
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
-	
-	-- move up/down
-	if ym ~= nil and ym ~= 0 then
-		if ym > 0 then
-			print("Up : ", ym)
-			tposMoveUp(tpos,ym)
-		else
-			print("Down : ", ym)
-			tposMoveDown(tpos,-ym)
-		end
-	end
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
-
-	tposSetDir(tpos,4);
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
-
-	tposTurnAround(tpos)
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
-	
-	tposSetDir(tpos,3);
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
---]
+	tposMoveAbs(tpos,zm,ym,xm)
+	tposMoveRel(tpos, -zm, -ym, -xm)
 
 end
 
