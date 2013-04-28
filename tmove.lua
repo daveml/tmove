@@ -137,7 +137,7 @@ function tposTurnLeft(tpos)
 	end
 end
 
-function tposTurnAround(tpos)
+function tposMoveTurnAround(tpos)
 	tposTurnLeft(tpos)
 	tposTurnLeft(tpos)
 	return true
