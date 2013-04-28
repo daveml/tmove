@@ -116,7 +116,7 @@ function tposRotateDirRight(tpos)
 end
 
 function tposTurnLeft(tpos)
-	if turtle.left() then
+	if turtle.turnLeft() then
 		tposRotateDirLeft(tpos)
 		return true
 	else
@@ -124,14 +124,9 @@ function tposTurnLeft(tpos)
 	end
 end
 
-function tposTurnArround(tpos)
-	for i=1, count do
-		if turtle.turnLeft() then
-			tposRotateDirLeft(tpos)
-		else
-			return false
-		end
-	end
+function tposTurnAround(tpos)
+	tposTurnLeft(tpos)
+	tposTurnLeft(tpos)
 	return true
 end
 
