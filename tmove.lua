@@ -360,6 +360,7 @@ function jobQueue.popright (list)
 end
 
 
+
 function main()
 	GLOBAL_lock(__LOCK_TABLE)
 	
@@ -389,9 +390,10 @@ function main()
 
 	params = {tpos, zm, xm, ym}
 	job = {Q_tposMoveAbs, {tpos, zm, xm, ym}}
+
 	jobQueue.pushright(jQ, job)
 	
-	job = jobQueue.popleft(jQ, job)
+	job = jobQueue.popleft(jQ)
 	
 	job[1](job[2])
 	
