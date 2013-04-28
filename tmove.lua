@@ -257,12 +257,63 @@ function Refuel(count)
 	return true
 end
 
+function tposMoveSlideLeft(tpos, count)
+	tposTurnLeft(tpos)
+	tposMoveFwd(tpos,count)
+	tposTurnRight(tpos)
+	return true
+end
+
+function tposMoveSlideRight(tpos, count)
+	tposTurnRight(tpos)
+	tposMoveFwd(tpos,count)
+	tposTurnLeft(tpos)
+	return true
+end
+
+function tposMoveZ(tpos, count)
+	if count > 0 then
+		return tposMoveFwd(tpos, count)
+	else
+		return tposMoveBack(tpos, -count)
+	end
+end
+
+function tposMoveX(tpos, count)
+	if count > 0 then
+		return tposMoveSlideRight(tpos, count)
+	else
+		return tposMoveSlideLeft(tpos, -count)
+	end
+end
+	
+function tposMoveY(tpos, count)
+	if count > 0 then
+		return tposMoveUp(tpos, count)
+	else
+		return tposMoveDown(tpos, -count)
+	end
+end
+
+function tposMoveAbs(tpos,z,x,y)
+	tposMoveZ(tpos, z - tpos.z)
+	tposMoveX(tpos, x - tpos.x)
+	tposMoveY(tpos, y - tpos.y)
+end
+
+function tposMoveRel(tpos,z,x,y)
+	tposMoveZ(tpos, z)
+	tposMoveX(tpos, x)
+	tposMoveY(tpos, y)
+end
 
 
 
 function main()
 	
-	tpos = tposInit()
+	if tpos == nil then
+		tpos = tposInit()
+	end
 	
 	if zm == nil then
 		usage()
@@ -281,7 +332,9 @@ function main()
 	end
 	
 	print("Turtle moving")
-	 
+	
+	 tposMoveAbs(zm,zy,zx)
+--[	 
 	-- move forward/back
 	if zm ~= 0 then
 		if zm > 0 then
@@ -330,6 +383,7 @@ function main()
 	
 	tposSetDir(tpos,3);
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
+--]
 
 end
 
