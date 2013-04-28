@@ -383,16 +383,17 @@ function main()
 	
 	jQ = jobQueue.new()
 
-	params = {tpos, zm, xm, ym}
-	if tposMoveAbs(params) == false then 
+	str = "tposMoveAbs("..tpos..","..zm..","..xm..","..ym..")"
+	print(str)
+	if tposMoveAbs(tpos, zm, xm, ym) == false then 
 		print("Move failed!")
 		exit(0)
 	end
 	
-	if tposMoveRel(tpos,-zm,-xm,-ym) == false then
-		print("Move failed!")
-		exit(0)
-	end
+--	if tposMoveRel(tpos,-zm,-xm,-ym) == false then
+--		print("Move failed!")
+--		exit(0)
+--	end
 	
 
 end
