@@ -304,6 +304,10 @@ function tposMoveRel(tpos,z,x,y)
 end
 
 
+function Q_tposMoveAbs(params)
+	tposMoveAbs(params[1],params[2],params[3],params[4])
+end
+
 
 function Refuel(count)
 	print("Refueling...")
@@ -383,12 +387,18 @@ function main()
 	
 	jQ = jobQueue.new()
 
-	str = "tposMoveAbs("..tpos..","..zm..","..xm..","..ym..")"
-	print(str)
-	if tposMoveAbs(tpos, zm, xm, ym) == false then 
-		print("Move failed!")
-		exit(0)
-	end
+	params = {tpos, zm, xm, ym}
+	job = {Q_tposMoveAbs, params}
+	jobQueue.pushRight(jQ, job)
+	
+	op, params = jobQueue.popLeft(jQ, job)
+	
+	op(paams)
+	
+--	if tposMoveAbs(tpos, zm, xm, ym) == false then 
+--		print("Move failed!")
+--		exit(0)
+--	end
 	
 --	if tposMoveRel(tpos,-zm,-xm,-ym) == false then
 --		print("Move failed!")
