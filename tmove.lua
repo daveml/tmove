@@ -20,56 +20,6 @@ function usage()
 
 end
 
-function movefwd(count)
-	for i=1, count do
-		if turtle.detect() == false then
-			tposMoveFwd()
-		else
-			print("Blocked!")
-			return false
-		end
-	end
-	return true
-end
-
-function moveUp(count)
-	for i=1, count do
-		if turtle.detectUp() == false then
-			tposMoveUp()
-		else
-			print("Blocked!")
-			return false
-		end
-	end
-	return true
-end
-
-function moveDown(count)
-	for i=1, count do
-		if turtle.detectDown() == false then
-			tposMoveDown()
-		else
-			print("Blocked")
-			return false
-		end
-	end
-	return true
-end
-
-function Refuel(count)
-	print("Refueling...")
-	local fuelLevel = turtle.getFuelLevel()
-	while fuelLevel < count do
-		if turtle.refuel(1) == false then
-			print("Insufficuent fuel onboard!")
-			return false
-		end
-		fuelLevel = fuelLevel + turtle.getFuelLevel()
-	end
-	print("Fuel - OK!")
-	return true
-end
-
 function tposInit()
 	tpos.z=0
 	tpos.y=0
@@ -166,9 +116,62 @@ function tposMoveDown()
 	end
 end
 
+function movefwd(count)
+	for i=1, count do
+		if turtle.detect() == false then
+			tposMoveFwd()
+		else
+			print("Blocked!")
+			return false
+		end
+	end
+	return true
+end
+
+function moveUp(count)
+	for i=1, count do
+		if turtle.detectUp() == false then
+			tposMoveUp()
+		else
+			print("Blocked!")
+			return false
+		end
+	end
+	return true
+end
+
+function moveDown(count)
+	for i=1, count do
+		if turtle.detectDown() == false then
+			tposMoveDown()
+		else
+			print("Blocked")
+			return false
+		end
+	end
+	return true
+end
+
+function Refuel(count)
+	print("Refueling...")
+	local fuelLevel = turtle.getFuelLevel()
+	while fuelLevel < count do
+		if turtle.refuel(1) == false then
+			print("Insufficuent fuel onboard!")
+			return false
+		end
+		fuelLevel = fuelLevel + turtle.getFuelLevel()
+	end
+	print("Fuel - OK!")
+	return true
+end
+
+
 
 
 function main()
+	
+	tposInit()
 	
 	if zm == nil then
 		usage()
