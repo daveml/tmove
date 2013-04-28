@@ -319,7 +319,41 @@ function Refuel(count)
 	return true
 end
 
+local jobQueue = {}
 
+function jobQueue.new()
+	return {first = 0, last = -1}
+end
+
+function jobQueue.pushleft (list, value)
+    local first = list.first - 1
+    list.first = first
+	list[first] = value
+end
+    
+function jobQueue.pushright (list, value)
+    local last = list.last + 1
+    list.last = last
+	list[last] = value
+end
+    
+function jobQueue.popleft (list)
+    local first = list.first
+    if first > list.last then error("list is empty") end
+    local value = list[first]
+    list[first] = nil        -- to allow garbage collection
+    list.first = first + 1
+	return value
+end
+    
+function jobQueue.popright (list)
+    local last = list.last
+    if list.first > last then error("list is empty") end
+    local value = list[last]
+    list[last] = nil         -- to allow garbage collection
+    list.last = last - 1
+	return value
+end
 
 
 function main()
@@ -347,7 +381,10 @@ function main()
 	
 	print("Turtle moving")
 	
-	if tposMoveAbs(tpos,zm,xm,ym) == false then 
+	jQ = jobQueue.new()
+
+	params = {tpos, zm, xm, ym}
+	if tposMoveAbs(params) == false then 
 		print("Move failed!")
 		exit(0)
 	end
@@ -356,7 +393,9 @@ function main()
 		print("Move failed!")
 		exit(0)
 	end
+	
 
 end
+
 
 main()
