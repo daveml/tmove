@@ -183,6 +183,9 @@ function tposMoveBack(tpos,count)
 end
 
 function tposMoveUp(tpos,count)
+	if count == 0 then
+		return true -- annoying
+	end
 	for i=1, count do
 		if turtle.detectUp() == false then
 			_tposMoveUp(tpos)
@@ -195,6 +198,9 @@ function tposMoveUp(tpos,count)
 end
 
 function tposMoveDown(count)
+	if count == 0 then
+		return true -- annoying
+	end
 	for i=1, count do
 		if turtle.detectDown() == false then
 			_tposMoveDown(tpos)
