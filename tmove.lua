@@ -387,8 +387,8 @@ function main()
 	
 	jQ = jobQueue.new()
 
---	params = {tpos, zm, xm, ym}
-	job = {Q_tposMoveAbs, {tpos, zm, xm, ym}}
+	params = {tpos, zm, xm, ym}
+	job = {Q_tposMoveAbs, params}
 	jobQueue.pushright(jQ, job)
 	
 	job = jobQueue.popleft(jQ, job)
