@@ -24,7 +24,7 @@ function tposInit()
 	tpos.z=0
 	tpos.y=0
 	tpos.x=0
-	tpos.dir={1,2,3,4}
+	tpos.dir=1
 	return tpos
 end
 
