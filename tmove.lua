@@ -82,8 +82,25 @@ function tposMoveBack()
 	end
 end
 
+function tposRotateDirLeft()
+	if tpos.dir == 1 then
+		tpos.dir = 4
+	else
+		tpos.dir = tpos.dir - 1
+	end
+end
+
+function tposRotateDirRight()
+	if tpos.dir == 4 then
+		tpos.dir = 1
+	else
+		tpos.dir = tpos.dir + 1
+	end
+end
+
 function tposTurnLeft()
 	if turtle.left() then
+		tposRotateDirLeft()
 		return true
 	else
 		return false
@@ -91,7 +108,8 @@ function tposTurnLeft()
 end
 
 function tposTurnRight()
-	if turtle.left() then
+	if turtle.right() then
+		tposRotateDirRight()
 		return true
 	else
 		return false
