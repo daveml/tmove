@@ -391,7 +391,7 @@ function main()
 	job = {Q_tposMoveAbs, params}
 	jobQueue.pushright(jQ, job)
 	
-	op, params = jobQueue.popLeft(jQ, job)
+	op, params = jobQueue.popleft(jQ, job)
 	
 	op(paams)
 	
