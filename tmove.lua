@@ -310,6 +310,7 @@ end
 
 
 function main()
+	GLOBAL_lock(__LOCK_TABLE)
 	
 	if tpos == nil then
 		tpos = tposInit()
