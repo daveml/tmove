@@ -23,8 +23,8 @@ end
 function tposInit()
 	tpos.z=0
 	tpos.y=0
-	tpoz.x=0
-	tpoz.dir={1,2,3,4}
+	tpos.x=0
+	tpos.dir={1,2,3,4}
 	return tpos
 end
 
