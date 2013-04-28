@@ -360,6 +360,7 @@ function main()
 	print("Turtle moving")
 	
 	tposMoveAbs(tpos,zm,xm,ym)
+	tposMoveRel(tpos,-zm,-xm,-ym)
 
 end
 
