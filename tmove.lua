@@ -126,7 +126,7 @@ end
 
 function tposTurnArround(tpos)
 	for i=1, count do
-		if turtle.left() then
+		if turtle.turnLeft() then
 			tposRotateDirLeft(tpos)
 		else
 			return false
@@ -136,7 +136,7 @@ function tposTurnArround(tpos)
 end
 
 function tposTurnRight(tpos)
-	if turtle.right() then
+	if turtle.turnRight() then
 		tposRotateDirRight(tpos)
 		return true
 	else
