@@ -5,7 +5,23 @@ local args = {...}
 local zm = tonumber(args[1])
 local xm = tonumber(args[2])
 local ym = tonumber(args[3])
-local tpos = {}
+--local tpos = {}
+
+--===================================================
+--=  Niklas Frykholm 
+-- basically if user tries to create global variable
+-- the system will not let them!!
+-- call GLOBAL_lock(_G)
+--
+--===================================================
+function GLOBAL_lock(t)
+  local mt = getmetatable(t) or {}
+  mt.__newindex = lock_new_index
+  setmetatable(t, mt)
+end
+
+local __LOCK_TABLE = {}
+GLOBAL_lock(__LOCK_TABLE)
 
 function usage()
 
@@ -21,6 +37,7 @@ function usage()
 end
 
 function tposInit()
+	tpos = {}
 	tpos.z=0
 	tpos.y=0
 	tpos.x=0
@@ -28,44 +45,44 @@ function tposInit()
 	return tpos
 end
 
-function tposIncZX_get(dir)
-	if dir == 1 then
+function tposIncZX_get(tpos)
+	if tpos.dir == 1 then
 		return 1,0
-	elseif dir == 2 then
+	elseif tpos.dir == 2 then
 		return 0,1
-	elseif dir == 3 then
+	elseif tpos.dir == 3 then
 		return -1, 0
 	else -- 3
 		return 0, -1
 	end
 end
 
-function tposDecZX_get(dir)
-	if dir == 1 then
+function tposDecZX_get(tpos)
+	if tpos.dir == 1 then
 		return -1,0
-	elseif dir == 2 then
+	elseif tpos.dir == 2 then
 		return 0,-1
-	elseif dir == 3 then
+	elseif tpos.dir == 3 then
 		return 1, 0
 	else -- 3
 		return 0, 1
 	end
 end
 
-function tposIncZX()
+function tposIncZX(tpos)
 	z,x = tposIncZX_get(tpos.dir)
 	tpos.z = tpos.z + z
 	tpos.x = tpos.x + x
 end
 
-function tposDecZX()
+function tposDecZX(tpos)
 	z,x = tposIncZX_get(tpos.dir)
 	tpos.z = tpos.z - z
 	tpos.x = tpos.x - x
 end
 
 
-function tposMoveFwd()
+function _tposMoveFwd(tpos)
 	if turtle.forward() then
 		tposIncZX(tpos)
 		return true
@@ -74,15 +91,15 @@ function tposMoveFwd()
 	end
 end
 
-function tposMoveBack()
+function _tposMoveBack(tpos)
 	if turtle.back() then
-		tposDecZX()
+		tposDecZX(tpos)
 	else
 		return false
 	end
 end
 
-function tposRotateDirLeft()
+function tposRotateDirLeft(tpos)
 	if tpos.dir == 1 then
 		tpos.dir = 4
 	else
@@ -90,7 +107,7 @@ function tposRotateDirLeft()
 	end
 end
 
-function tposRotateDirRight()
+function tposRotateDirRight(tpos)
 	if tpos.dir == 4 then
 		tpos.dir = 1
 	else
@@ -98,25 +115,25 @@ function tposRotateDirRight()
 	end
 end
 
-function tposTurnLeft()
+function tposTurnLeft(tpos)
 	if turtle.left() then
-		tposRotateDirLeft()
+		tposRotateDirLeft(tpos)
 		return true
 	else
 		return false
 	end
 end
 
-function tposTurnRight()
+function tposTurnRight(tpos)
 	if turtle.right() then
-		tposRotateDirRight()
+		tposRotateDirRight(tpos)
 		return true
 	else
 		return false
 	end
 end
 
-function tposMoveUp()
+function _tposMoveUp(tpos)
 	if turtle.up() then
 		tpos.y = tpos.y + 1
 		return true
@@ -125,7 +142,7 @@ function tposMoveUp()
 	end
 end
 
-function tposMoveDown()
+function _tposMoveDown(tpos)
 	if turtle.down() then
 		tpos.y = tpos.y - 1
 		return true
@@ -137,7 +154,7 @@ end
 function movefwd(count)
 	for i=1, count do
 		if turtle.detect() == false then
-			tposMoveFwd()
+			_tposMoveFwd(tpos)
 		else
 			print("Blocked!")
 			return false
@@ -149,7 +166,7 @@ end
 function moveUp(count)
 	for i=1, count do
 		if turtle.detectUp() == false then
-			tposMoveUp()
+			_tposMoveUp(tpos)
 		else
 			print("Blocked!")
 			return false
@@ -161,7 +178,7 @@ end
 function moveDown(count)
 	for i=1, count do
 		if turtle.detectDown() == false then
-			tposMoveDown()
+			_tposMoveDown(tpos)
 		else
 			print("Blocked")
 			return false
@@ -169,6 +186,9 @@ function moveDown(count)
 	end
 	return true
 end
+
+
+
 
 function Refuel(count)
 	print("Refueling...")
@@ -216,11 +236,11 @@ function main()
 			movefwd(zm)
 		else
 			print("Back : ",zm)
-			turtle.turnLeft()
-			turtle.turnLeft()
+			tposTurnLeft()
+			tposTurnLeft()
 			movefwd(-zm)
-			turtle.turnRight()
-			turtle.turnRight()
+			tposTurnRight()
+			tposTurnRight()
 		end
 	end
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
@@ -228,7 +248,7 @@ function main()
 	if xm ~= nil and xm ~= 0 then
 		if xm > 0 then
 			print("Right : ", xm)
-			turtle.turnRight()
+			tpos.TurnRightle.turnRight()
 			movefwd(xm)
 			turtle.turnLeft()
 		else
