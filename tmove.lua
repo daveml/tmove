@@ -44,8 +44,16 @@ function tposInit()
 	tpos.x=0
 	tpos.dir=1
 	tpos.canBreakOnMove=true
+	tpos.debugPrint=true
 	return tpos
 end
+
+function tposPrint(tpos, str)
+	if tpos.debugPrint then 
+		print(str)
+	end
+end
+
 
 function tposIncZX_get(tpos)
 	if tpos.dir == 1 then
@@ -89,6 +97,7 @@ function _tposMoveFwd(tpos)
 		tposIncZX(tpos)
 		return true
 	else
+		tposPrint(tpos,"forward() failed!")
 		return false
 	end
 end
@@ -97,6 +106,7 @@ function _tposMoveBack(tpos)
 	if turtle.back() then
 		tposDecZX(tpos)
 	else
+		tposPrint(tpos,"back() failed!")
 		return false
 	end
 end
@@ -122,6 +132,7 @@ function tposTurnLeft(tpos)
 		tposRotateDirLeft(tpos)
 		return true
 	else
+		tposPrint(tpos,"turnLeft() failed")
 		return false
 	end
 end
@@ -137,6 +148,7 @@ function tposTurnRight(tpos)
 		tposRotateDirRight(tpos)
 		return true
 	else
+		tposPrint(tpos,"turnRight() failed")
 		return false
 	end
 end
@@ -146,6 +158,7 @@ function _tposMoveUp(tpos)
 		tpos.y = tpos.y + 1
 		return true
 	else
+		tposPrint(tpos,"up() failed")
 		return false
 	end
 end
@@ -155,6 +168,7 @@ function _tposMoveDown(tpos)
 		tpos.y = tpos.y - 1
 		return true
 	else
+		tposPrint(tpos,"down() failed")
 		return false
 	end
 end
@@ -163,13 +177,11 @@ function tposMoveFwd(tpos,count)
 	for i=1, count do
 		if turtle.detect() == false then
 			_tposMoveFwd(tpos)
+		elseif tpos.canBreakOnMove and turtle.dig() then
+			_tposMoveFwd(tpos)
 		else
-			if tpos.canBreakOnMove and turtle.dig() then
-				_tposMoveFwd(tpos)
-			else
-				print("Blocked!")
-				return false
-			end
+			print("Blocked!")
+			return false
 		end
 	end
 	return true
@@ -179,16 +191,13 @@ function tposMoveBack(tpos,count)
 	for i=1, count do
 		if turtle.detect() == false then
 			_tposMoveBack(tpos)
-		else
+		elseif tpos.canBreakOnMove and turtle.dig() then
 			tposMoveTurnAround(tpos)
-			if tpos.canBreakOnMove and turtle.dig() then
-				tposMoveTurnAround(tpos)
-				_tposMoveBack(tpos)
-			else
-				tposMoveTurnAround(tpos)
-				print("Blocked!")
-				return false
-			end
+			tposMoveTurnAround(tpos)
+			_tposMoveBack(tpos)
+		else
+			print("Blocked!")
+			return false
 		end
 	end
 	return true
@@ -198,13 +207,11 @@ function tposMoveUp(tpos,count)
 	for i=1, count do
 		if turtle.detectUp() == false then
 			_tposMoveUp(tpos)
-		else
-			if tpos.canBreakOnMove and turtle.digUp() then
-				_tposMoveUp(tpos)
-			else			
-				print("Blocked!")
-				return false
-			end
+		elseif tpos.canBreakOnMove and turtle.digUp() then
+			_tposMoveUp(tpos)
+		else			
+			print("Blocked!")
+			return false
 		end
 	end
 	return true
@@ -214,13 +221,11 @@ function tposMoveDown(tpos, count)
 	for i=1, count do
 		if turtle.detectDown() == false then
 			_tposMoveDown(tpos)
-		else
-			if tpos.canBreakOnMove and turtle.digDown() then
-				_tposMoveDown(tpos)
-			else			
-				print("Blocked-", tpos.canBreakOnMove)
-				return false
-			end
+		elseif tpos.canBreakOnMove and turtle.digDown() then
+			_tposMoveDown(tpos)
+		else			
+			print("Blocked-", tpos.canBreakOnMove)
+			return false
 		end
 	end
 	return true
