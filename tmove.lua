@@ -223,7 +223,7 @@ function main()
 			turtle.turnRight()
 		end
 	end
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y)		
+	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
 	-- move left/right
 	if xm ~= nil and xm ~= 0 then
 		if xm > 0 then
@@ -238,7 +238,7 @@ function main()
 			turtle.turnRight()
 		end
 	end
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y)		
+	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
 	
 	-- move up/down
 	if ym ~= nil and ym ~= 0 then
@@ -250,7 +250,7 @@ function main()
 			moveDown(-ym)
 		end
 	end
-	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y)		
+	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
 
 end
 
