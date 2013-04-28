@@ -359,8 +359,7 @@ function main()
 	
 	print("Turtle moving")
 	
-	tposMoveAbs(tpos,zm,ym,xm)
-	tposMoveRel(tpos, -zm, -ym, -xm)
+	tposMoveAbs(tpos,zm,xm,ym)
 
 end
 
