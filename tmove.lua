@@ -105,6 +105,7 @@ end
 function _tposMoveBack(tpos)
 	if turtle.back() then
 		tposDecZX(tpos)
+		return true
 	else
 		tposPrint(tpos,"back() failed!")
 		return false
@@ -138,8 +139,8 @@ function tposTurnLeft(tpos)
 end
 
 function tposMoveTurnAround(tpos)
-	tposTurnLeft(tpos)
-	tposTurnLeft(tpos)
+	if tposTurnLeft(tpos) == false then return false end
+	if tposTurnLeft(tpos) == false then return false end 
 	return true
 end
 
@@ -231,26 +232,6 @@ function tposMoveDown(tpos, count)
 	return true
 end
 
-function tposDirGT(a,b)
-	if a == 1 then
-		if b == 4 then
-			return true
-		end
-	else
-		return a > b
-	end
-end
-
-function tposDirLT(a,b)
-	if a == 4 then
-		if b == 1 then
-			return true
-		end
-	else
-		return a < b
-	end
-end
-
 function tposDirSubtract(a,b)
 	local rval = a - b
 	if rval < 0 then
@@ -266,33 +247,21 @@ function tposSetDir(tpos, dir)
 	end
 end
 
-
-
-function Refuel(count)
-	print("Refueling...")
-	local fuelLevel = turtle.getFuelLevel()
-	while fuelLevel < count do
-		if turtle.refuel(1) == false then
-			print("Insufficuent fuel onboard!")
-			return false
-		end
-		fuelLevel = fuelLevel + turtle.getFuelLevel()
-	end
-	print("Fuel - OK!")
-	return true
-end
-
 function tposMoveSlideLeft(tpos, count)
-	tposTurnLeft(tpos)
-	tposMoveFwd(tpos,count)
-	tposTurnRight(tpos)
+	if count > 0 then
+		if tposTurnLeft(tpos) == false then return false end
+		if tposMoveFwd(tpos,count) == false then return false end
+		if tposTurnRight(tpos) == false then return false end
+	end
 	return true
 end
 
 function tposMoveSlideRight(tpos, count)
-	tposTurnRight(tpos)
-	tposMoveFwd(tpos,count)
-	tposTurnLeft(tpos)
+	if count > 0 then
+		if tposTurnRight(tpos) == false then return false end
+		if tposMoveFwd(tpos,count) == false then return false end
+		if tposTurnLeft(tpos) == false then return false end
+	end
 	return true
 end
 
@@ -321,16 +290,35 @@ function tposMoveY(tpos, count)
 end
 
 function tposMoveAbs(tpos,z,x,y)
-	tposMoveZ(tpos, z - tpos.z)
-	tposMoveX(tpos, x - tpos.x)
-	tposMoveY(tpos, y - tpos.y)
+	if tposMoveZ(tpos, z - tpos.z) == false then return false end
+	if tposMoveX(tpos, x - tpos.x) == false then return false end
+	if tposMoveY(tpos, y - tpos.y) == false then return false end
+	return true
 end
 
 function tposMoveRel(tpos,z,x,y)
-	tposMoveZ(tpos, z)
-	tposMoveX(tpos, x)
-	tposMoveY(tpos, y)
+	if tposMoveZ(tpos, z) == false then return false end
+	if tposMoveX(tpos, x) == false then return false end
+	if tposMoveY(tpos, y) == false then return false end
+	return true
 end
+
+
+
+function Refuel(count)
+	print("Refueling...")
+	local fuelLevel = turtle.getFuelLevel()
+	while fuelLevel < count do
+		if turtle.refuel(1) == false then
+			print("Insufficuent fuel onboard!")
+			return false
+		end
+		fuelLevel = fuelLevel + turtle.getFuelLevel()
+	end
+	print("Fuel - OK!")
+	return true
+end
+
 
 
 
@@ -359,8 +347,15 @@ function main()
 	
 	print("Turtle moving")
 	
-	tposMoveAbs(tpos,zm,xm,ym)
-	tposMoveRel(tpos,-zm,-xm,-ym)
+	if tposMoveAbs(tpos,zm,xm,ym) == false then 
+		print("Move failed!")
+		exit(0)
+	end
+	
+	if tposMoveRel(tpos,-zm,-xm,-ym) == false then
+		print("Move failed!")
+		exit(0)
+	end
 
 end
 
