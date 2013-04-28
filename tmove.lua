@@ -65,7 +65,7 @@ function tposDecZX()
 end
 
 
-function tposFwd()
+function tposMoveFwd()
 	if turtle.forward() then
 		tposIncZX(tpos)
 		return true
@@ -74,7 +74,7 @@ function tposFwd()
 	end
 end
 
-function tposBack()
+function tposMoveBack()
 	if turtle.back() then
 		tposDecZX()
 	else
