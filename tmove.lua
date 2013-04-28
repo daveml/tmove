@@ -205,7 +205,7 @@ function main()
 			turtle.turnRight()
 		end
 	end
-			
+	print(tpos)		
 	-- move left/right
 	if xm ~= nil and xm ~= 0 then
 		if xm > 0 then
@@ -220,6 +220,7 @@ function main()
 			turtle.turnRight()
 		end
 	end
+	print(tpos)		
 	
 	-- move up/down
 	if ym ~= nil and ym ~= 0 then
@@ -231,6 +232,8 @@ function main()
 			moveDown(-ym)
 		end
 	end
+	print(tpos)		
+
 end
 
 main()
