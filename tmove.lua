@@ -5,6 +5,7 @@ local args = {...}
 local zm = tonumber(args[1])
 local xm = tonumber(args[2])
 local ym = tonumber(args[3])
+local d = tonumber(args[4])
 --local tpos = {}
 
 --===================================================
@@ -205,6 +206,41 @@ function tposMoveDown(count)
 	return true
 end
 
+function tposDirGT(a,b)
+	if a == 1 then
+		if b == 4 then
+			return true
+		end
+	else
+		return a > b
+	end
+end
+
+function tposDirLT(a,b)
+	if a == 4 then
+		if b == 1 then
+			return true
+		end
+	else
+		return a < b
+	end
+end
+
+function tposDirSubtract(a,b)
+	local rval = a - b
+	if rval < 0 then
+		rval = rval + 4
+	end
+	return rval
+end
+
+function tposSetDir(tpos, dir)
+	local newdir = tposDirSubtract(dir, tpos.dir)
+	for count = 1, newdir do
+		tposTurnRight(tpos,newdir)
+	end
+end
+
 
 
 function Refuel(count)
@@ -285,6 +321,10 @@ function main()
 		end
 	end
 	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
+
+	print("TPOS:", tpos.z, " ", tpos.x, " ", tpos.y, " ", tpos.dir)		
+	tposSetDir(4);
+	
 
 end
 
