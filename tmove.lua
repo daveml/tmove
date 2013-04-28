@@ -391,9 +391,9 @@ function main()
 	job = {Q_tposMoveAbs, params}
 	jobQueue.pushright(jQ, job)
 	
-	op, params = jobQueue.popleft(jQ, job)
+	op, p = jobQueue.popleft(jQ, job)
 	
-	op(paams)
+	op(p)
 	
 --	if tposMoveAbs(tpos, zm, xm, ym) == false then 
 --		print("Move failed!")
