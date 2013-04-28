@@ -333,7 +333,8 @@ function main()
 	
 	print("Turtle moving")
 	
-	 tposMoveAbs(zm,zy,zx)
+	 tposMoveAbs(tpos,zm,zy,zx)
+	 
 --[	 
 	-- move forward/back
 	if zm ~= 0 then
