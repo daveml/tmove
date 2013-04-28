@@ -28,7 +28,7 @@ function tposInit()
 	return tpos
 end
 
-function tposIncZX(dir)
+function tposIncZX_get(dir)
 	if dir == 1 then
 		return 1,0
 	elseif dir == 2 then
