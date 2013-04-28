@@ -5,6 +5,7 @@ local args = {...}
 local zm = tonumber(args[1])
 local xm = tonumber(args[2])
 local ym = tonumber(args[3])
+local tpos = {}
 
 function usage()
 
@@ -22,7 +23,7 @@ end
 function movefwd(count)
 	for i=1, count do
 		if turtle.detect() == false then
-			turtle.forward()
+			tposMoveFwd()
 		else
 			print("Blocked!")
 			return false
@@ -34,7 +35,7 @@ end
 function moveUp(count)
 	for i=1, count do
 		if turtle.detectUp() == false then
-			turtle.up()
+			tposMoveUp()
 		else
 			print("Blocked!")
 			return false
@@ -46,7 +47,7 @@ end
 function moveDown(count)
 	for i=1, count do
 		if turtle.detectDown() == false then
-			turtle.down()
+			tposMoveDown()
 		else
 			print("Blocked")
 			return false
@@ -68,6 +69,104 @@ function Refuel(count)
 	print("Fuel - OK!")
 	return true
 end
+
+function tposInit()
+	tpos.z=0
+	tpos.y=0
+	tpoz.x=0
+	tpoz.dir={1,2,3,4}
+	return tpos
+end
+
+function tposIncZX(dir)
+	if dir == 1 then
+		return 1,0
+	elseif dir == 2 then
+		return 0,1
+	elseif dir == 3 then
+		return -1, 0
+	else -- 3
+		return 0, -1
+	end
+end
+
+function tposDecZX_get(dir)
+	if dir == 1 then
+		return -1,0
+	elseif dir == 2 then
+		return 0,-1
+	elseif dir == 3 then
+		return 1, 0
+	else -- 3
+		return 0, 1
+	end
+end
+
+function tposIncZX()
+	z,x = tposIncZX_get(tpos.dir)
+	tpos.z = tpos.z + z
+	tpos.x = tpos.x + x
+end
+
+function tposDecZX()
+	z,x = tposIncZX_get(tpos.dir)
+	tpos.z = tpos.z - z
+	tpos.x = tpos.x - x
+end
+
+
+function tposFwd()
+	if turtle.forward() then
+		tposIncZX(tpos)
+		return true
+	else
+		return false
+	end
+end
+
+function tposBack()
+	if turtle.back() then
+		tposDecZX()
+	else
+		return false
+	end
+end
+
+function tposTurnLeft()
+	if turtle.left() then
+		return true
+	else
+		return false
+	end
+end
+
+function tposTurnRight()
+	if turtle.left() then
+		return true
+	else
+		return false
+	end
+end
+
+function tposMoveUp()
+	if turtle.up() then
+		tpos.y = tpos.y + 1
+		return true
+	else
+		return false
+	end
+end
+
+function tposMoveDown()
+	if turtle.down() then
+		tpos.y = tpos.y - 1
+		return true
+	else
+		return false
+	end
+end
+
+
 
 function main()
 	
