@@ -58,7 +58,7 @@ function main()
 		xm = 0
 	end
 		
-	if Refuel(zm+ym+xm) == false then
+	if Refuel(1, zm+ym+xm) == false then
 		return
 	end
 	
