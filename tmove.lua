@@ -62,6 +62,14 @@ function main()
 		return
 	end
 	
+    if tpos == nil then
+		tpos = tposInit()
+	end
+	
+	tposShow(tpos)
+	
+   	tpos.placeMode = false
+
 	print("Turtle moving")
 	
 	jQ = jobQueue.new()
