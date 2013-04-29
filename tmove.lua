@@ -70,7 +70,7 @@ function main()
 
 	jobQueue.pushright(jQ, job)
 	
-	joqQueue.run(jQ)
+	jobQueue.run(jQ)
 
 end
 
