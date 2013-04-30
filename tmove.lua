@@ -74,9 +74,7 @@ function main()
 	
 	jQ = jobQueue.new()
 
-	job = {Q_tposMoveRel, {tpos, zm, xm, ym}}
-
-	jobQueue.pushright(jQ, job)
+	jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, zm, xm, ym}})
 	
 	jobQueue.run(jQ)
 
